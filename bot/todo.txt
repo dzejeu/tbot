@@ -1,0 +1,15 @@
+1. Looting (DONE)
+- loot all around char
+
+2. healing/mana (DONE)
+- scrap percent of hp/mana from screen
+- press heal/mana
+- check again
+
+3. attacking next target
+- attack closest target (DONE)
+- check if still targeting (check for red borders) (NEEDS WORK)
+- when do we start looting? (NEEDS WORK)
+
+4. cave bot
+- follow some waypoints on minimap?
