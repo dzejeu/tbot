@@ -19,11 +19,13 @@ def to_global_centralized(mini_map_waypoint):
     return Point(global_x, global_y)
 
 
-def locate_on_minimap(waypoint, confidence=0.8):
+def locate_on_minimap(waypoint, confidence=0.85):
     return locate(waypoint, screenshot(region=MINI_MAP_REGION), confidence=confidence)
 
 
 def is_on_waypoint(waypoint):
     cords = locate_on_minimap(waypoint)
+    if not cords:
+        return False
     global_cords = to_global_centralized(Point(cords.left, cords.top))
-    return abs((MINI_MAP_CENTER.x - global_cords.x) + (MINI_MAP_CENTER.y - global_cords.y)) < 8
+    return abs((MINI_MAP_CENTER.x - global_cords.x) + (MINI_MAP_CENTER.y - global_cords.y)) < 4

@@ -1,9 +1,10 @@
 from pyautogui import screenshot, alert
 from bot.cords.point import Point
+import os
 
 MINI_MAP_CENTER = Point(1485, 60)
 OFFSET = 15
-SUBFOLDER = ...
+SUBFOLDER = "mt-ghule"
 
 """
 Please create a mark on the waypoint - it is not mandatory, but will help locating waypoint on screen, so it will simply
@@ -15,6 +16,8 @@ waypoints_recorded = 0
 
 if not SUBFOLDER:
     raise AttributeError('set subfolder for this cave')
+else:
+    os.makedirs(f"screens/{SUBFOLDER}", exist_ok=True)
 
 print("Kill me when it's done!")
 

@@ -23,8 +23,3 @@ def is_currently_attacking():
         if _is_red(col[1]):
             return True
     return False
-
-
-alert("go")
-
-print(is_currently_attacking())
