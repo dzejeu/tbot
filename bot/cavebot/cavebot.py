@@ -1,13 +1,18 @@
 from bot.cavebot.minimap import is_on_waypoint, to_global_centralized, locate_on_minimap, Point
-from pyautogui import sleep, alert, leftClick, moveTo
+from pyautogui import sleep, alert, leftClick, moveTo, failSafeCheck
 import os
 
 NEUTRAL_MOUSE_POS = Point(500, 500)
 
 
 def wait_for_arrival(waypoint):
+    times = 0
     while not is_on_waypoint(waypoint):
+        times += 1
+        if times > 1:
+            return False
         sleep(2)
+    return True
 
 
 def move_to_point(point):
@@ -31,6 +36,7 @@ next_pos = 0
 sleep(3)
 
 while True:
+    failSafeCheck()
     wpt = waypoints[next_pos]
     next_pos = (next_pos + 1) % len(waypoints)
     cords = locate_on_minimap(wpt, confidence=0.7)
@@ -41,4 +47,5 @@ while True:
 
     global_wpt = to_global_centralized(Point(cords.left, cords.top))
     move_to_point(global_wpt)
-    wait_for_arrival(wpt)
+    while not wait_for_arrival(wpt):
+        next_pos = (next_pos - 1) % len(waypoints)
